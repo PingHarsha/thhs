@@ -1,0 +1,51 @@
+<mat-toolbar>
+  <button [matMenuTriggerFor]="projects" mat-button>
+    <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
+    <span>Projects</span>
+  </button>
+  <button mat-button>Production Tables</button>
+  <button [matMenuTriggerFor]="admin" mat-button>
+    Admin
+    <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
+  </button>
+  <button [matMenuTriggerFor]="rugs" mat-button>
+    RUGS
+    <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
+  </button>
+
+  <mat-menu #projects="matMenu">
+    <ng-template matMenuContent>
+      <button mat-menu-item>Work in progress</button>
+      <button [matMenuTriggerFor]="wipTestPhases" mat-menu-item>
+        Test Phases
+      </button>
+      <button mat-menu-item>Archived</button>
+      <button mat-menu-item>Deleted</button>
+    </ng-template>
+  </mat-menu>
+
+  <mat-menu #admin="matMenu">
+    <ng-template matMenuContent>
+      <button mat-menu-item>E-mail</button>
+      <button mat-menu-item>Batch</button>
+      <button mat-menu-item>DAD Type</button>
+    </ng-template>
+  </mat-menu>
+
+  <mat-menu #rugs="matMenu">
+    <ng-template matMenuContent>
+      <button mat-menu-item>RUG Error Codes</button>
+      <button mat-menu-item>Blocked Contracts</button>
+    </ng-template>
+  </mat-menu>
+
+  <mat-menu #wipTestPhases="matMenu">
+    <ng-template matMenuContent>
+      <button mat-menu-item>Before TMHP Test</button>
+      <button mat-menu-item>TMHP Test</button>
+      <button mat-menu-item>Tested</button>
+      <button mat-menu-item>Archived</button>
+      <button mat-menu-item>Deleted</button>
+    </ng-template>
+  </mat-menu>
+</mat-toolbar>
