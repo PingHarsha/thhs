@@ -7,12 +7,14 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: APP_ROUTES.productionTables,
+    redirectTo: APP_ROUTES.projects,
   },
   {
     canMatch: [authGuard, roleGuard],
     loadComponent: () =>
       import('./projects/projects.component').then(m => m.ProjectsComponent),
+    loadChildren: () =>
+      import('./projects/projects.routes').then(m => m.routes),
     path: APP_ROUTES.projects,
     title: 'Projects',
   },
@@ -29,6 +31,7 @@ export const routes: Routes = [
     canMatch: [authGuard, roleGuard],
     loadComponent: () =>
       import('./admin/admin.component').then(m => m.AdminComponent),
+    loadChildren: () => import('./admin/admin.routes').then(m => m.routes),
     path: APP_ROUTES.admin,
     title: 'Admin',
   },
@@ -36,6 +39,7 @@ export const routes: Routes = [
     canMatch: [authGuard, roleGuard],
     loadComponent: () =>
       import('./rugs/rugs.component').then(m => m.RugsComponent),
+    loadChildren: () => import('./rugs/rugs.routes').then(m => m.routes),
     path: APP_ROUTES.rugs,
     title: 'Rugs',
   },

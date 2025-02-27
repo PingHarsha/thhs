@@ -3,7 +3,9 @@
     <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
     <span>Projects</span>
   </button>
-  <button mat-button>Production Tables</button>
+  <a [routerLink]="'/' + APP_ROUTES.productionTables" mat-button
+  >Production Tables</a
+  >
   <button [matMenuTriggerFor]="admin" mat-button>
     Admin
     <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
@@ -15,37 +17,110 @@
 
   <mat-menu #projects="matMenu">
     <ng-template matMenuContent>
-      <button mat-menu-item>Work in progress</button>
-      <button [matMenuTriggerFor]="wipTestPhases" mat-menu-item>
+      <a
+        [routerLink]="
+          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.workInProgress
+        "
+        mat-menu-item
+      >Work in progress</a
+      >
+      <a
+        [matMenuTriggerFor]="wipTestPhases"
+        [routerLink]="
+          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.workInProgress
+        "
+        mat-menu-item>
         Test Phases
-      </button>
-      <button mat-menu-item>Archived</button>
-      <button mat-menu-item>Deleted</button>
+      </a>
+      <a
+        [routerLink]="
+          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.archived
+        "
+        mat-menu-item
+      >Archived</a
+      >
+      <a
+        [routerLink]="'/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.deleted"
+        mat-menu-item
+      >Deleted</a
+      >
     </ng-template>
   </mat-menu>
 
   <mat-menu #admin="matMenu">
     <ng-template matMenuContent>
-      <button mat-menu-item>E-mail</button>
-      <button mat-menu-item>Batch</button>
-      <button mat-menu-item>DAD Type</button>
+      <a
+        [routerLink]="'/' + APP_ROUTES.admin + '/' + ADMIN_ROUTES.email"
+        mat-menu-item
+      >E-mail</a
+      >
+      <a
+        [routerLink]="'/' + APP_ROUTES.admin + '/' + ADMIN_ROUTES.batch"
+        mat-menu-item
+      >Batch</a
+      >
+      <a
+        [routerLink]="'/' + APP_ROUTES.admin + '/' + ADMIN_ROUTES.dadType"
+        mat-menu-item
+      >DAD Type</a
+      >
     </ng-template>
   </mat-menu>
 
   <mat-menu #rugs="matMenu">
     <ng-template matMenuContent>
-      <button mat-menu-item>RUG Error Codes</button>
-      <button mat-menu-item>Blocked Contracts</button>
+      <a
+        [routerLink]="'/' + APP_ROUTES.rugs + '/' + RUGS_ROUTES.rugErrorCodes"
+        mat-menu-item
+      >RUG Error Codes</a
+      >
+      <a
+        [routerLink]="
+          '/' + APP_ROUTES.rugs + '/' + RUGS_ROUTES.blockedContracts
+        "
+        mat-menu-item
+      >Blocked Contracts</a
+      >
     </ng-template>
   </mat-menu>
 
   <mat-menu #wipTestPhases="matMenu">
     <ng-template matMenuContent>
-      <button mat-menu-item>Before TMHP Test</button>
-      <button mat-menu-item>TMHP Test</button>
-      <button mat-menu-item>Tested</button>
-      <button mat-menu-item>Archived</button>
-      <button mat-menu-item>Deleted</button>
+      <a
+        [routerLink]="
+          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.workInProgress
+        "
+        mat-menu-item
+      >Before TMHP Test</a
+      >
+      <a
+        [routerLink]="
+          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.workInProgress
+        "
+        mat-menu-item
+      >TMHP Test</a
+      >
+      <a
+        [routerLink]="
+          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.workInProgress
+        "
+        mat-menu-item
+      >Tested</a
+      >
+      <a
+        [routerLink]="
+          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.workInProgress
+        "
+        mat-menu-item
+      >Archived</a
+      >
+      <a
+        [routerLink]="
+          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.workInProgress
+        "
+        mat-menu-item
+      >Deleted</a
+      >
     </ng-template>
   </mat-menu>
 </mat-toolbar>
