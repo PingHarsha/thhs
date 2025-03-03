@@ -1,112 +1,15 @@
 <mat-toolbar>
-  <button [matMenuTriggerFor]="projects" mat-button>
-    <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
-    <span>Projects</span>
-  </button>
-  <a [routerLink]="'/' + APP_ROUTES.productionTables" mat-button
-  >Production Tables</a
-  >
-  <button [matMenuTriggerFor]="admin" mat-button>
-    Admin
-    <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
-  </button>
-  <button [matMenuTriggerFor]="rugs" mat-button>
-    RUGS
-    <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
-  </button>
-
-  <mat-menu #projects="matMenu">
-    <ng-template matMenuContent>
-      <a
-        [routerLink]="
-          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.workInProgress
-        "
-        mat-menu-item
-      >Work in progress</a
-      >
-      <a
-        [matMenuTriggerFor]="wipTestPhases"
-        [routerLink]="
-          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.workInProgress
-        "
-        mat-menu-item>
-        Test Phases
-      </a>
-      <a
-        [routerLink]="
-          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.archived
-        "
-        mat-menu-item
-      >Archived</a
-      >
-      <a
-        [routerLink]="'/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.deleted"
-        mat-menu-item
-      >Deleted</a
-      >
-    </ng-template>
-  </mat-menu>
-
-  <mat-menu #admin="matMenu">
-    <ng-template matMenuContent>
-      <a
-        [routerLink]="'/' + APP_ROUTES.admin + '/' + ADMIN_ROUTES.email"
-        mat-menu-item
-      >E-mail</a
-      >
-      <a
-        [routerLink]="'/' + APP_ROUTES.admin + '/' + ADMIN_ROUTES.batch"
-        mat-menu-item
-      >Batch</a
-      >
-      <a
-        [routerLink]="'/' + APP_ROUTES.admin + '/' + ADMIN_ROUTES.dadType"
-        mat-menu-item
-      >DAD Type</a
-      >
-    </ng-template>
-  </mat-menu>
-
-  <mat-menu #rugs="matMenu">
-    <ng-template matMenuContent>
-      <a
-        [routerLink]="'/' + APP_ROUTES.rugs + '/' + RUGS_ROUTES.rugErrorCodes"
-        mat-menu-item
-      >RUG Error Codes</a
-      >
-      <a
-        [routerLink]="
-          '/' + APP_ROUTES.rugs + '/' + RUGS_ROUTES.blockedContracts
-        "
-        mat-menu-item
-      >Blocked Contracts</a
-      >
-    </ng-template>
-  </mat-menu>
-
-  <mat-menu #wipTestPhases="matMenu">
-    <ng-template matMenuContent>
-      <a
-        [routerLink]="
-          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.workInProgress
-        "
-        mat-menu-item
-      >Before TMHP Test</a
-      >
-      <a
-        [routerLink]="
-          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.workInProgress
-        "
-        mat-menu-item
-      >TMHP Test</a
-      >
-      <a
-        [routerLink]="
-          '/' + APP_ROUTES.projects + '/' + PROJECTS_ROUTES.workInProgress
-        "
-        mat-menu-item
-      >Tested</a
-      >
-    </ng-template>
-  </mat-menu>
+  @for (link of menuLinks(); track link.path) {
+    @if (link.children) {
+      <button [matMenuTriggerFor]="menu.childMenu()" mat-button>
+        <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
+        <span>{{ link.title }}</span>
+      </button>
+      <app-header-toolbar-menu #menu [menuLinks]="link.children"/>
+    } @else {
+      <a [routerLink]="link.path" mat-button [routerLinkActive]="'active'">{{
+          link.title
+        }}</a>
+    }
+  }
 </mat-toolbar>

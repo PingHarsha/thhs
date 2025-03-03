@@ -1,6 +1,3 @@
-export const PROJECTS_ROUTES = {
-  workInProgress: 'work-in-progress',
-  testPhases: 'test-phases',
-  archived: 'archived',
-  deleted: 'deleted',
-};
+import { ProjectsRoutes } from './constants';
+
+export type ProjectsRoutesKeys = (typeof ProjectsRoutes)[number];

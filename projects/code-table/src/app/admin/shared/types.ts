@@ -1,5 +1,3 @@
-export const ADMIN_ROUTES = {
-  batch: 'batch',
-  dadType: 'dad-type',
-  email: 'email',
-};
+import { AdminRoutes } from './constants';
+
+export type AdminRoutesKeys = (typeof AdminRoutes)[number];

@@ -1,64 +1,78 @@
 import { Routes } from '@angular/router';
-import { APP_ROUTES } from './shared/types';
 import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
+import { APP_ROUTES } from './shared/constants';
 
+const {
+  rugs,
+  admin,
+  productionTables,
+  restricted,
+  projects,
+  '404': fourFour,
+} = APP_ROUTES;
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: APP_ROUTES.projects,
+    redirectTo: projects.path,
   },
   {
     canMatch: [authGuard, roleGuard],
-    loadComponent: () =>
-      import('./projects/projects.component').then(m => m.ProjectsComponent),
+    data: { allowedUserRoles: projects.userRole },
     loadChildren: () =>
       import('./projects/projects.routes').then(m => m.routes),
-    path: APP_ROUTES.projects,
-    title: 'Projects',
+    loadComponent: () =>
+      import('./projects/projects.component').then(m => m.ProjectsComponent),
+    path: projects.path,
+    title: projects.title,
   },
   {
     canMatch: [authGuard, roleGuard],
+    data: { allowedUserRoles: productionTables.userRole },
     loadComponent: () =>
       import('./production-tables/production-tables.component').then(
         m => m.ProductionTablesComponent
       ),
-    path: APP_ROUTES.productionTables,
-    title: 'Production Tables',
+    path: productionTables.path,
+    title: productionTables.title,
   },
   {
     canMatch: [authGuard, roleGuard],
+    data: { allowedUserRoles: admin.userRole },
     loadComponent: () =>
       import('./admin/admin.component').then(m => m.AdminComponent),
     loadChildren: () => import('./admin/admin.routes').then(m => m.routes),
-    path: APP_ROUTES.admin,
-    title: 'Admin',
+    path: admin.path,
+    title: admin.title,
   },
   {
     canMatch: [authGuard, roleGuard],
+    data: { allowedUserRoles: rugs.userRole },
     loadComponent: () =>
       import('./rugs/rugs.component').then(m => m.RugsComponent),
     loadChildren: () => import('./rugs/rugs.routes').then(m => m.routes),
-    path: APP_ROUTES.rugs,
-    title: 'Rugs',
+    path: rugs.path,
+    title: rugs.title,
   },
   {
     canMatch: [authGuard],
+    data: { allowedUserRoles: restricted.userRole },
     loadComponent: () =>
       import('./restricted/restricted.component').then(
         m => m.RestrictedComponent
       ),
-    path: APP_ROUTES.restricted,
-    title: 'Restricted',
+    path: restricted.path,
+    title: restricted.title,
   },
   {
     canMatch: [authGuard],
+    data: { allowedUserRoles: fourFour.userRole },
     loadComponent: () =>
       import('./four-o-four/four-o-four.component').then(
         c => c.FourOFourComponent
       ),
     path: '**',
-    title: '404',
+    title: fourFour.title,
   },
 ];

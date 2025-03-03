@@ -1,38 +1,28 @@
-import { Component } from '@angular/core';
-import { MatAnchor, MatButton } from '@angular/material/button';
-import {
-  MatMenu,
-  MatMenuContent,
-  MatMenuItem,
-  MatMenuTrigger,
-} from '@angular/material/menu';
+import { Component, inject } from '@angular/core';
+import { AppStore } from '../../app.store';
 import { MatToolbar } from '@angular/material/toolbar';
+import { MatAnchor, MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
-import { APP_ROUTES } from '../../shared/types';
-import { PROJECTS_ROUTES } from '../../projects/shared/types';
-import { RUGS_ROUTES } from '../../rugs/shared/types';
-import { ADMIN_ROUTES } from '../../admin/shared/types';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { HeaderToolbarMenuComponent } from '../header-toolbar-menu/header-toolbar-menu.component';
 
 @Component({
-  selector: 'app-header-toolbar',
   imports: [
-    MatMenu,
     MatToolbar,
-    MatMenuTrigger,
-    MatMenuItem,
-    MatIcon,
-    MatMenuContent,
     MatAnchor,
-    RouterLink,
     MatButton,
+    MatIcon,
+    MatMenuTrigger,
+    RouterLink,
+    HeaderToolbarMenuComponent,
+    RouterLinkActive,
   ],
-  templateUrl: './header-toolbar.component.html',
+  selector: 'app-header-toolbar',
   styleUrl: './header-toolbar.component.scss',
+  templateUrl: './header-toolbar.component.html',
 })
 export class HeaderToolbarComponent {
-  protected readonly APP_ROUTES = APP_ROUTES;
-  protected readonly PROJECTS_ROUTES = PROJECTS_ROUTES;
-  protected readonly ADMIN_ROUTES = ADMIN_ROUTES;
-  protected readonly RUGS_ROUTES = RUGS_ROUTES;
+  readonly #appStore = inject(AppStore);
+  menuLinks = this.#appStore.menuLinks();
 }

@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-batch',
   imports: [],
   templateUrl: './batch.component.html',
-  styleUrl: './batch.component.scss'
+  styleUrl: './batch.component.scss',
 })
-export class BatchComponent {
-
-}
+export class BatchComponent {}

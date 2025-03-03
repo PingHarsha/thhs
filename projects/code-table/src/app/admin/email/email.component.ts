@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-email',
   imports: [],
   templateUrl: './email.component.html',
-  styleUrl: './email.component.scss'
+  styleUrl: './email.component.scss',
 })
-export class EmailComponent {
-
-}
+export class EmailComponent {}

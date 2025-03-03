@@ -8,9 +8,8 @@ describe('BeforeTmhpTestComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BeforeTmhpTestComponent]
-    })
-    .compileComponents();
+      imports: [BeforeTmhpTestComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BeforeTmhpTestComponent);
     component = fixture.componentInstance;

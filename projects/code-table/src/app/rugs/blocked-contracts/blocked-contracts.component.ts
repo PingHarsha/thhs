@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-blocked-contracts',
   imports: [],
   templateUrl: './blocked-contracts.component.html',
-  styleUrl: './blocked-contracts.component.scss'
+  styleUrl: './blocked-contracts.component.scss',
 })
-export class BlockedContractsComponent {
-
-}
+export class BlockedContractsComponent {}

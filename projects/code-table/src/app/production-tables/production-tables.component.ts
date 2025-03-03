@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-production-tables',
   imports: [],
   templateUrl: './production-tables.component.html',
-  styleUrl: './production-tables.component.scss'
+  styleUrl: './production-tables.component.scss',
 })
-export class ProductionTablesComponent {
-
-}
+export class ProductionTablesComponent {}

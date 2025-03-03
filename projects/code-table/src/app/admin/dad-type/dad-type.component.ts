@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-dad-type',
   imports: [],
   templateUrl: './dad-type.component.html',
-  styleUrl: './dad-type.component.scss'
+  styleUrl: './dad-type.component.scss',
 })
-export class DadTypeComponent {
-
-}
+export class DadTypeComponent {}

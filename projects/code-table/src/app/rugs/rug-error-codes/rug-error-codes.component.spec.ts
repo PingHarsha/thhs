@@ -8,9 +8,8 @@ describe('RugErrorCodesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RugErrorCodesComponent]
-    })
-    .compileComponents();
+      imports: [RugErrorCodesComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(RugErrorCodesComponent);
     component = fixture.componentInstance;

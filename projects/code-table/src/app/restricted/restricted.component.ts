@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-restricted',
   imports: [],
   templateUrl: './restricted.component.html',
-  styleUrl: './restricted.component.scss'
+  styleUrl: './restricted.component.scss',
 })
-export class RestrictedComponent {
-
-}
+export class RestrictedComponent {}

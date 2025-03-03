@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-before-tmhp-test',
   imports: [],
   templateUrl: './before-tmhp-test.component.html',
-  styleUrl: './before-tmhp-test.component.scss'
+  styleUrl: './before-tmhp-test.component.scss',
 })
-export class BeforeTmhpTestComponent {
-
-}
+export class BeforeTmhpTestComponent {}

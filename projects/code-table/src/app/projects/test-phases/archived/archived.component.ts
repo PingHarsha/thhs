@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-archived',
   imports: [],
   templateUrl: './archived.component.html',
-  styleUrl: './archived.component.scss'
+  styleUrl: './archived.component.scss',
 })
-export class ArchivedComponent {
-
-}
+export class ArchivedComponent {}

@@ -1,4 +1,3 @@
-export const RUGS_ROUTES = {
-  rugErrorCodes: 'rug-error-code',
-  blockedContracts: 'blocked-contracts',
-};
+import { RugsRoutes } from './constants';
+
+export type RugsRoutesKeys = (typeof RugsRoutes)[number];

@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-four-o-four',
   imports: [],
   templateUrl: './four-o-four.component.html',
-  styleUrl: './four-o-four.component.scss'
+  styleUrl: './four-o-four.component.scss',
 })
-export class FourOFourComponent {
-
-}
+export class FourOFourComponent {}

@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-rug-error-codes',
   imports: [],
   templateUrl: './rug-error-codes.component.html',
-  styleUrl: './rug-error-codes.component.scss'
+  styleUrl: './rug-error-codes.component.scss',
 })
-export class RugErrorCodesComponent {
-
-}
+export class RugErrorCodesComponent {}

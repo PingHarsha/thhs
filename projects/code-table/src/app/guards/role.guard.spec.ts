@@ -4,8 +4,8 @@ import { CanMatchFn } from '@angular/router';
 import { roleGuard } from './role.guard';
 
 describe('roleGuard', () => {
-  const executeGuard: CanMatchFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => roleGuard(...guardParameters));
+  const executeGuard: CanMatchFn = (...guardParameters) =>
+    TestBed.runInInjectionContext(() => roleGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

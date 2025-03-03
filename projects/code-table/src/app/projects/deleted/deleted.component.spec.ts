@@ -8,9 +8,8 @@ describe('DeletedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DeletedComponent]
-    })
-    .compileComponents();
+      imports: [DeletedComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DeletedComponent);
     component = fixture.componentInstance;

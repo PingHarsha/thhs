@@ -8,9 +8,8 @@ describe('ArchivedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArchivedComponent]
-    })
-    .compileComponents();
+      imports: [ArchivedComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ArchivedComponent);
     component = fixture.componentInstance;
