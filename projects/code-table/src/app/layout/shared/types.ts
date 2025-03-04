@@ -1,6 +1,6 @@
 export type MenuLink = {
   title: string;
-  children: MenuLink[];
+  children?: MenuLink[];
   path: string;
   id: string;
 };

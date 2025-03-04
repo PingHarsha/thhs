@@ -7,9 +7,8 @@ import { ProjectsStore } from './projects.store';
   imports: [RouterOutlet],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
-  providers: [ProjectsStore],
 })
 export class ProjectsComponent {
   readonly #projectsStore = inject(ProjectsStore);
-  readonly projects = this.#projectsStore.projects;
+  readonly #projects = this.#projectsStore.projects;
 }

@@ -10,7 +10,6 @@ export const routes: Routes = [
     redirectTo: workInProgress.path,
   },
   {
-    data: { pageTitle: workInProgress.title },
     loadComponent: () =>
       import('./work-in-progress/work-in-progress.component').then(
         c => c.WorkInProgressComponent
@@ -18,7 +17,13 @@ export const routes: Routes = [
     path: workInProgress.path,
   },
   {
-    data: { pageTitle: testPhases.title },
+    loadComponent: () =>
+      import('./work-in-progress/work-in-progress.component').then(
+        c => c.WorkInProgressComponent
+      ),
+    path: `${workInProgress.path}/:id`,
+  },
+  {
     loadComponent: () =>
       import('./test-phases/test-phases.component').then(
         m => m.TestPhasesComponent
@@ -28,15 +33,23 @@ export const routes: Routes = [
     path: testPhases.path,
   },
   {
-    data: { pageTitle: archived.title },
     loadComponent: () =>
       import('./archived/archived.component').then(m => m.ArchivedComponent),
     path: archived.path,
   },
   {
-    data: { pageTitle: archived.title },
+    loadComponent: () =>
+      import('./archived/archived.component').then(m => m.ArchivedComponent),
+    path: `${archived.path}/:id`,
+  },
+  {
     loadComponent: () =>
       import('./deleted/deleted.component').then(m => m.DeletedComponent),
     path: deleted.path,
+  },
+  {
+    loadComponent: () =>
+      import('./deleted/deleted.component').then(m => m.DeletedComponent),
+    path: `${deleted.path}/:id`,
   },
 ];

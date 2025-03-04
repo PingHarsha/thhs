@@ -16,6 +16,7 @@ import { Project, ProjectType, TestPhaseStatus } from './projects/shared/types';
 import { v4 as uuid } from 'uuid';
 import { PROJECTS_ROUTES } from './projects/shared/constants';
 import { TEST_PHASES_ROUTES } from './projects/test-phases/shared/constants';
+import { ProductionTable } from './production-tables/shared/types';
 
 const data = <T extends { [i: string]: any }>(links: T, parentPath = '') => {
   const keys = Object.keys(links);
@@ -61,12 +62,44 @@ const initialState = {
 
 const menuLinks: MenuLink[] = [];
 
-function getProjectLink(id: number, type: ProjectType) {
+const getProjectsTestPhaseLink = (
+  projects: string,
+  testPhases: string,
+  id: number,
+  testPhaseStatus: TestPhaseStatus
+) => {
+  const {
+    beforeTest: { path: beforeTestPath },
+    test: { path: testPath },
+    tested: { path: testedPath },
+  } = TEST_PHASES_ROUTES;
+  if (testPhaseStatus === 'tmhp_test') {
+    return `/${projects}/${testPhases}/${testPath}/${id}`;
+  }
+  if (testPhaseStatus === 'tested') {
+    return `/${projects}/${testPhases}/${testedPath}/${id}`;
+  }
+  if (testPhaseStatus === 'before_tmhp') {
+    return `/${projects}/${testPhases}/${beforeTestPath}/${id}`;
+  }
+  return '';
+};
+
+function getProjectLink(
+  id: number,
+  type: ProjectType,
+  testPhaseStatus: TestPhaseStatus
+) {
   const { testPhases, workInProgress, archived, deleted } = PROJECTS_ROUTES;
   const { projects } = APP_ROUTES;
   switch (type) {
     case 'Testphases':
-      return `/${projects.path}/${testPhases.path}/${id}`;
+      return getProjectsTestPhaseLink(
+        projects.path,
+        testPhases.path,
+        id,
+        testPhaseStatus
+      );
     case 'archived':
       return `/${projects.path}/${archived.path}/${id}`;
     case 'deleted':
@@ -79,8 +112,7 @@ function getProjectLink(id: number, type: ProjectType) {
 function convertProjectToMenuLink(project: Project) {
   const menuLink: MenuLink = {
     title: project.name,
-    children: [],
-    path: getProjectLink(project.id, project.type),
+    path: getProjectLink(project.id, project.type, project.test_phase_status),
     id: uuid(),
   };
   return menuLink;
@@ -132,7 +164,7 @@ const updateProjectNestedPaths = (
     childLink.children = deletedProjectsLinks;
   }
   if (childLink.path.includes(testPhasesPath)) {
-    childLink.children.forEach(child => {
+    childLink.children?.forEach(child => {
       updateTestPhaseChildren(
         child,
         testedPath,
@@ -206,6 +238,26 @@ export const AppStore = signalStore(
     menuLinks: computed(() => store._menuLinks),
   })),
   withMethods(store => ({
+    updateProductionTables: (productionTables: ProductionTable[]) => {
+      const { productionTables: routeType } = APP_ROUTES;
+      const productionTableChildren: MenuLink[] = productionTables.map(
+        table => {
+          const menuLink: MenuLink = {
+            title: table.name,
+            path: `${routeType.path}/${table.id}`,
+            id: uuid(),
+          };
+          return menuLink;
+        }
+      );
+      const links = structuredClone(store._menuLinks());
+      links.forEach(link => {
+        if (link.path.includes(routeType.path)) {
+          link.children = productionTableChildren;
+        }
+      });
+      patchState(store, { _menuLinks: links });
+    },
     updateProjects: (projects: Project[]) => {
       const getMenuLinks = (projectType: ProjectType) => {
         return projects
@@ -246,7 +298,7 @@ export const AppStore = signalStore(
       const newMenuItems = structuredClone(store._menuLinks()).map(
         (menuLink: MenuLink) => {
           if (menuLink.title === projectsPath) {
-            menuLink.children.forEach((childLink: MenuLink) => {
+            menuLink.children?.forEach((childLink: MenuLink) => {
               updateProjectNestedPaths(
                 childLink,
                 workInProgressPath,

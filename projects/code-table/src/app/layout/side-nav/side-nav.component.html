@@ -1,9 +1,16 @@
-<mat-tree #tree [childrenAccessor]="childrenAccessor" [dataSource]="dataSource()">
+<mat-tree
+  #tree
+  [childrenAccessor]="childrenAccessor"
+  [dataSource]="dataSource()">
   <!-- This is the tree node template for leaf nodes -->
-  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+  <mat-tree-node
+    *matTreeNodeDef="let node"
+    class="menu-link"
+    matTreeNodePadding
+    routerLinkActive="active">
     <!-- use a disabled button to provide padding for tree leaf -->
     <button disabled mat-icon-button></button>
-    {{ node.title }}
+    <a [routerLink]="node.path">{{ node.title }}</a>
   </mat-tree-node>
   <!-- This is the tree node template for expandable nodes -->
   <mat-tree-node

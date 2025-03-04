@@ -10,6 +10,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { AppStore } from '../../app.store';
 import { MenuLink } from '../shared/types';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-side-nav',
@@ -21,6 +22,8 @@ import { MenuLink } from '../shared/types';
     MatTreeNodePadding,
     MatIconButton,
     MatTreeNodeToggle,
+    RouterLink,
+    RouterLinkActive,
   ],
   templateUrl: './side-nav.component.html',
   styleUrl: './side-nav.component.scss',

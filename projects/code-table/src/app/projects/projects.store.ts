@@ -1,7 +1,6 @@
 import {
   patchState,
   signalStore,
-  withHooks,
   withMethods,
   withProps,
   withState,
@@ -23,13 +22,14 @@ const PROJECTS_STORE: ProjectsState = {
 };
 
 export const ProjectsStore = signalStore(
+  { providedIn: 'root' },
   withState(PROJECTS_STORE),
   withProps(() => ({
     _projectsService: inject(ProjectsService),
     _appStore: inject(AppStore),
   })),
   withMethods(({ _projectsService, _appStore, ...store }) => ({
-    _loadProjects: rxMethod<void>(
+    loadProjects: rxMethod<void>(
       pipe(
         switchMap(() => {
           return _projectsService.getProjects().pipe(
@@ -46,10 +46,5 @@ export const ProjectsStore = signalStore(
         })
       )
     ),
-  })),
-  withHooks({
-    onInit(store) {
-      store._loadProjects();
-    },
-  })
+  }))
 );

@@ -1,0 +1,63 @@
+import { ProductionTable } from '../shared/types';
+
+export function getProductionTables(): ProductionTable[] {
+  return [
+    {
+      name: 'AAH- AUTH_AGENT_HOLD',
+      id: 1,
+      data: [
+        {
+          status: 'Production',
+          row_no: 9,
+          service_group: 1,
+          auth_agent_type: ' ',
+          auth_agent_name: ' ',
+          auth_agent_id: ' ',
+          auth_agent_mail_code: ' ',
+          auth_agent_phone: ' ',
+          agency_code: 324,
+          program_on_hold: ' N',
+          hold_begin_date: ' ',
+          hold_end_date: ' ',
+          contract_cap_check: ' ',
+          comments: ' SSAS INITIAL LOAD',
+          active: ' A',
+        },
+        {
+          status: 'Production',
+          row_no: 4,
+          service_group: 2,
+          auth_agent_type: ' CM',
+          auth_agent_name: ' CLASS Operations',
+          auth_agent_id: ' 2-PM',
+          auth_agent_mail_code: ' W-521',
+          auth_agent_phone: ' 512-438-4512',
+          agency_code: 324,
+          program_on_hold: ' Y',
+          hold_begin_date: ' 12/31/9999',
+          hold_end_date: ' 12/31/9999',
+          contract_cap_check: ' N',
+          comments: ' SSAS INITIAL LOAD',
+          active: ' A',
+        },
+        {
+          status: 'Production',
+          row_no: 1,
+          service_group: 4,
+          auth_agent_type: ' CM',
+          auth_agent_name: ' SSLC Program Manager',
+          auth_agent_id: ' 4-PM',
+          auth_agent_mail_code: ' ',
+          auth_agent_phone: ' ',
+          agency_code: 655,
+          program_on_hold: ' N',
+          hold_begin_date: ' ',
+          hold_end_date: ' ',
+          contract_cap_check: ' N',
+          comments: ' SSAS INITIAL LOAD',
+          active: ' A',
+        },
+      ],
+    },
+  ];
+}

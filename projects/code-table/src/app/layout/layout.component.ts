@@ -10,7 +10,6 @@ import {
 } from '@angular/material/sidenav';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { FooterComponent } from './footer/footer.component';
-import { ActionBarComponent } from './action-bar/action-bar.component';
 
 @Component({
   selector: 'app-layout',
@@ -22,7 +21,6 @@ import { ActionBarComponent } from './action-bar/action-bar.component';
     SideNavComponent,
     RouterOutlet,
     FooterComponent,
-    ActionBarComponent,
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
