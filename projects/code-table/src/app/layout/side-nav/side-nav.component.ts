@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import {
-  MatNestedTreeNode,
   MatTree,
   MatTreeNode,
   MatTreeNodeDef,
@@ -22,7 +21,6 @@ import { MenuLink } from '../shared/types';
     MatTreeNodePadding,
     MatIconButton,
     MatTreeNodeToggle,
-    MatNestedTreeNode,
   ],
   templateUrl: './side-nav.component.html',
   styleUrl: './side-nav.component.scss',

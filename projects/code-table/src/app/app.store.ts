@@ -3,6 +3,7 @@ import {
   signalStore,
   withComputed,
   withHooks,
+  withMethods,
   withState,
 } from '@ngrx/signals';
 import { computed, DestroyRef, inject } from '@angular/core';
@@ -11,6 +12,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { APP_ROUTES } from './shared/constants';
 import { MenuLink } from './layout/shared/types';
 import { LayoutStore } from './layout/layout.store';
+import { Project, ProjectType, TestPhaseStatus } from './projects/shared/types';
+import { v4 as uuid } from 'uuid';
+import { PROJECTS_ROUTES } from './projects/shared/constants';
+import { TEST_PHASES_ROUTES } from './projects/test-phases/shared/constants';
 
 const data = <T extends { [i: string]: any }>(links: T, parentPath = '') => {
   const keys = Object.keys(links);
@@ -55,6 +60,91 @@ const initialState = {
 };
 
 const menuLinks: MenuLink[] = [];
+
+function getProjectLink(id: number, type: ProjectType) {
+  const { testPhases, workInProgress, archived, deleted } = PROJECTS_ROUTES;
+  const { projects } = APP_ROUTES;
+  switch (type) {
+    case 'Testphases':
+      return `/${projects.path}/${testPhases.path}/${id}`;
+    case 'archived':
+      return `/${projects.path}/${archived.path}/${id}`;
+    case 'deleted':
+      return `/${projects.path}/${deleted.path}/${id}`;
+    case 'workinprogress':
+      return `/${projects.path}/${workInProgress.path}/${id}`;
+  }
+}
+
+function convertProjectToMenuLink(project: Project) {
+  const menuLink: MenuLink = {
+    title: project.name,
+    children: [],
+    path: getProjectLink(project.id, project.type),
+    id: uuid(),
+  };
+  return menuLink;
+}
+
+const updateTestPhaseChildren = (
+  child: MenuLink,
+  testedPath: string,
+  testedLinks: MenuLink[],
+  beforeThmpPath: string,
+  beforeThmpLinks: MenuLink[],
+  thmpTestedPath: string,
+  thmpTestedLinks: MenuLink[]
+) => {
+  if (child.path.includes(testedPath)) {
+    child.children = testedLinks;
+  }
+  if (child.path.includes(beforeThmpPath)) {
+    child.children = beforeThmpLinks;
+  }
+  if (child.path.includes(thmpTestedPath)) {
+    child.children = thmpTestedLinks;
+  }
+};
+
+const updateProjectNestedPaths = (
+  childLink: MenuLink,
+  workInProgressPath: string,
+  workInProgressProjects: MenuLink[],
+  archivedPath: string,
+  archivedLinks: MenuLink[],
+  deletedPath: string,
+  deletedProjectsLinks: MenuLink[],
+  testPhasesPath: string,
+  testedPath: string,
+  testedLinks: MenuLink[],
+  beforeThmpPath: string,
+  beforeThmpLinks: MenuLink[],
+  thmpTestedPath: string,
+  thmpTestedLinks: MenuLink[]
+) => {
+  if (childLink.path.includes(workInProgressPath)) {
+    childLink.children = workInProgressProjects;
+  }
+  if (childLink.path.includes(archivedPath)) {
+    childLink.children = archivedLinks;
+  }
+  if (childLink.path.includes(deletedPath)) {
+    childLink.children = deletedProjectsLinks;
+  }
+  if (childLink.path.includes(testPhasesPath)) {
+    childLink.children.forEach(child => {
+      updateTestPhaseChildren(
+        child,
+        testedPath,
+        testedLinks,
+        beforeThmpPath,
+        beforeThmpLinks,
+        thmpTestedPath,
+        thmpTestedLinks
+      );
+    });
+  }
+};
 
 export const AppStore = signalStore(
   { providedIn: 'root' },
@@ -114,5 +204,71 @@ export const AppStore = signalStore(
   }),
   withComputed(store => ({
     menuLinks: computed(() => store._menuLinks),
+  })),
+  withMethods(store => ({
+    updateProjects: (projects: Project[]) => {
+      const getMenuLinks = (projectType: ProjectType) => {
+        return projects
+          .filter(project => project.type === projectType)
+          .map(project => convertProjectToMenuLink(project));
+      };
+
+      const generateTestPhaseLinks = (
+        projects: Project[],
+        testPhaseStatus: TestPhaseStatus
+      ) => {
+        return projects
+          .filter(
+            project =>
+              project.type === 'Testphases' &&
+              project.test_phase_status === testPhaseStatus
+          )
+          .map(project => convertProjectToMenuLink(project));
+      };
+
+      const workInProgressProjects = getMenuLinks('workinprogress');
+      const archivedLinks = getMenuLinks('archived');
+      const deletedProjectsLinks = getMenuLinks('deleted');
+      const thmpTestedLinks = generateTestPhaseLinks(projects, 'tmhp_test');
+      const testedLinks = generateTestPhaseLinks(projects, 'tested');
+      const beforeThmpLinks = generateTestPhaseLinks(projects, 'before_tmhp');
+      const projectsPath = APP_ROUTES.projects.title;
+      const { testPhases, workInProgress, archived, deleted } = PROJECTS_ROUTES;
+      const { test, beforeTest, tested } = TEST_PHASES_ROUTES;
+      const thmpTestedPath = test.path;
+      const testedPath = tested.path;
+      const beforeThmpPath = beforeTest.path;
+      const workInProgressPath = workInProgress.path;
+      const archivedPath = archived.path;
+      const testPhasesPath = testPhases.path;
+      const deletedPath = deleted.path;
+
+      const newMenuItems = structuredClone(store._menuLinks()).map(
+        (menuLink: MenuLink) => {
+          if (menuLink.title === projectsPath) {
+            menuLink.children.forEach((childLink: MenuLink) => {
+              updateProjectNestedPaths(
+                childLink,
+                workInProgressPath,
+                workInProgressProjects,
+                archivedPath,
+                archivedLinks,
+                deletedPath,
+                deletedProjectsLinks,
+                testPhasesPath,
+                testedPath,
+                testedLinks,
+                beforeThmpPath,
+                beforeThmpLinks,
+                thmpTestedPath,
+                thmpTestedLinks
+              );
+            });
+          }
+          return menuLink;
+        }
+      );
+      patchState(store, { _menuLinks: newMenuItems });
+    },
   }))
 );
