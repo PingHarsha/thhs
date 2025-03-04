@@ -2,6 +2,13 @@
 @use 'tailwindcss';
 @use '@angular/material' as mat;
 
+:root {
+  --common-size: calc(1rem * .75);
+  --common-border-radius: var(--common-size);
+  --common-padding-size: var(--common-size);
+  --common-margin-size: var(--common-size);
+}
+
 html {
   @apply h-full;
   color-scheme: light;

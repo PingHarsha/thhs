@@ -1,28 +1,11 @@
 <app-header/>
-<section class="flex flex-row gap-6 align-start items-stretch p-3 px-6">
-  <aside class="w-1/4 max-w-[400px]">
-    <mat-card class="w-full h-full">
-      <mat-card-title> Title of the active module</mat-card-title>
-    </mat-card>
-  </aside>
-  <main class="w-full">
-    <mat-card class="w-full">
-      <mat-card-content>
-        <nav [tabPanel]="tabPanel" mat-tab-nav-bar>
-          @for (link of links(); track link.id) {
-            <a
-              mat-tab-link
-              (click)="navigate(link.path)"
-              [active]="activeIds().includes(link.id)">
-              {{ link.title }}
-            </a>
-          }
-        </nav>
-        <mat-tab-nav-panel #tabPanel>
-          <ng-content/>
-        </mat-tab-nav-panel>
-      </mat-card-content>
-    </mat-card>
-  </main>
-</section>
-<!--<app-footer/>-->
+<mat-drawer-container class="main-container">
+  <mat-drawer mode="side" opened>
+    <app-side-nav></app-side-nav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-action-bar/>
+    <router-outlet/>
+  </mat-drawer-content>
+</mat-drawer-container>
+<app-footer/>

@@ -1,28 +1,35 @@
 import { Component, effect, HostBinding, inject, signal } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
-import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
-import { MatTabLink, MatTabNav, MatTabNavPanel } from '@angular/material/tabs';
 import { LayoutStore } from './layout.store';
 import { MenuLink } from './shared/types';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import {
+  MatDrawer,
+  MatDrawerContainer,
+  MatDrawerContent,
+} from '@angular/material/sidenav';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { FooterComponent } from './footer/footer.component';
+import { ActionBarComponent } from './action-bar/action-bar.component';
 
 @Component({
   selector: 'app-layout',
   imports: [
     HeaderComponent,
-    MatCard,
-    MatCardContent,
-    MatCardTitle,
-    MatTabLink,
-    MatTabNav,
-    MatTabNavPanel,
+    MatDrawerContainer,
+    MatDrawer,
+    MatDrawerContent,
+    SideNavComponent,
+    RouterOutlet,
+    FooterComponent,
+    ActionBarComponent,
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })
 export class LayoutComponent {
   @HostBinding('class') appClass =
-    'flex flex-col w-full h-full items-stretch justify-start gap-3';
+    'flex flex-col w-full h-full items-stretch justify-start';
   links = signal<MenuLink[]>([]);
   activeIds = signal<string[]>([]);
   readonly layoutStore = inject(LayoutStore);
