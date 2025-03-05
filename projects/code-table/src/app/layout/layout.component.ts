@@ -1,4 +1,11 @@
-import { Component, effect, HostBinding, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  HostBinding,
+  inject,
+  signal,
+} from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { LayoutStore } from './layout.store';
 import { MenuLink } from './shared/types';
@@ -24,6 +31,7 @@ import { FooterComponent } from './footer/footer.component';
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent {
   @HostBinding('class') appClass =
@@ -32,6 +40,7 @@ export class LayoutComponent {
   activeIds = signal<string[]>([]);
   readonly layoutStore = inject(LayoutStore);
   readonly router = inject(Router);
+  protected showSideNav = this.layoutStore.sideNavToggle();
 
   constructor() {
     effect(() => {
