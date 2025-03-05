@@ -1,8 +1,7 @@
-export function formatKeys(keys: Set<string>): string[] {
-  const newKeys: string[] = [];
-  keys.forEach(key => {
-    // Remove underscores and capitalize the first letter of each word
-    newKeys.push(key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()));
-  });
-  return newKeys;
+import { ProductionTable } from './types';
+
+export function propsToSet(tableDetails: ProductionTable, keys: Set<string>) {
+  tableDetails.data.forEach(table =>
+    Object.keys(table).forEach(key => keys.add(key))
+  );
 }

@@ -22,17 +22,12 @@ import {
 } from '@angular/material/table';
 import { NgForOf } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ProductionTable, ProductionTableData } from './shared/types';
+import { ProductionTableData } from './shared/types';
 import { SnakeCaseToStringPipe } from '../shared/pipes/snake-case-to-string.pipe';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDivider } from '@angular/material/divider';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
-function propsToSet(tableDetails: ProductionTable, keys: Set<string>) {
-  tableDetails.data.forEach(table =>
-    Object.keys(table).forEach(key => keys.add(key))
-  );
-}
+import { propsToSet } from './shared/utils';
 
 @Component({
   selector: 'app-production-tables',
