@@ -6,6 +6,7 @@ import {
   HostBinding,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import { ProductionTablesStore } from './production-tables.store';
 import {
@@ -19,6 +20,7 @@ import {
   MatRow,
   MatRowDef,
   MatTable,
+  MatTableDataSource,
 } from '@angular/material/table';
 import { NgForOf } from '@angular/common';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -28,6 +30,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDivider } from '@angular/material/divider';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { propsToSet } from './shared/utils';
+import { MatSort, MatSortHeader } from '@angular/material/sort';
 
 @Component({
   selector: 'app-production-tables',
@@ -46,6 +49,8 @@ import { propsToSet } from './shared/utils';
     SnakeCaseToStringPipe,
     MatPaginator,
     MatDivider,
+    MatSort,
+    MatSortHeader,
   ],
   templateUrl: './production-tables.component.html',
   styleUrl: './production-tables.component.scss',
@@ -54,6 +59,9 @@ import { propsToSet } from './shared/utils';
 export class ProductionTablesComponent {
   @HostBinding('class') className = 'h-full';
   tableName = signal('');
+  dataSource: MatTableDataSource<ProductionTableData>;
+  readonly paginator = viewChild(MatPaginator);
+  readonly sort = viewChild(MatSort);
   protected displayedColumns = signal<string[]>([]);
   protected columnsToDisplay = signal<string[]>([]);
   protected data = signal<ProductionTableData[]>([]);
@@ -67,6 +75,25 @@ export class ProductionTablesComponent {
         .pipe(takeUntilDestroyed(this.#destroyRef))
         .subscribe(params => this.getTableDataById(params));
     });
+    this.dataSource = new MatTableDataSource(this.data());
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator() ?? null;
+    this.dataSource.sort = this.sort() ?? null;
+  }
+
+  showDetails(data: ProductionTableData) {
+    console.log(data);
+  }
+
+  protected applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   private getTableDataById(params: Params) {
