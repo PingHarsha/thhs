@@ -21,8 +21,8 @@ import {
   MatTable,
 } from '@angular/material/table';
 import { NgForOf } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { ProductionTableData } from './shared/types';
+import { ActivatedRoute, Params } from '@angular/router';
+import { ProductionTable, ProductionTableData } from './shared/types';
 import { SnakeCaseToStringPipe } from '../shared/pipes/snake-case-to-string.pipe';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDivider } from '@angular/material/divider';
@@ -65,20 +65,25 @@ export class ProductionTablesComponent {
     effect(() => {
       this.#route.params
         .pipe(takeUntilDestroyed(this.#destroyRef))
-        .subscribe(params => {
-          const id = params['id'];
-          const tableDetails =
-            this.#productionTablesStore.getTableDetailsById(+id);
-          if (!tableDetails) {
-            return;
-          }
-          const keys = new Set<string>();
-          propsToSet(tableDetails, keys);
-          this.displayedColumns.set(Array.from(keys));
-          this.columnsToDisplay.set(Array.from(keys));
-          this.tableName.set(`${tableDetails.name} Production Table`);
-          this.data.set(tableDetails.data);
-        });
+        .subscribe(params => this.getTableDataById(params));
     });
+  }
+
+  private getTableDataById(params: Params) {
+    const id = params['id'];
+    const tableDetails = this.#productionTablesStore.getTableDetailsById(+id);
+    if (!tableDetails) {
+      return;
+    }
+    this.updateTableDetails(tableDetails);
+  }
+
+  private updateTableDetails(tableDetails: ProductionTable) {
+    const keys = new Set<string>();
+    propsToSet(tableDetails, keys);
+    this.displayedColumns.set(Array.from(keys));
+    this.columnsToDisplay.set(Array.from(keys));
+    this.tableName.set(`${tableDetails.name} Production Table`);
+    this.data.set(tableDetails.data);
   }
 }
