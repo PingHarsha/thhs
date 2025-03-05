@@ -2,17 +2,17 @@
   class="mat-elevation-z8 w-full h-full flex flex-col items-stretch justify-items-start">
   <div class="flex flex-row items-center justify-items-start p-3">
     <h2>
-      <strong>{{ tableName }}</strong>
+      <strong>{{ tableName() }}</strong>
     </h2>
   </div>
   <mat-divider class="w-full"/>
   <table
-    [dataSource]="data"
+    [dataSource]="data()"
     [fixedLayout]="true"
     class="overflow-x-auto overflow-y-scroll"
     mat-table>
     <ng-container
-      *ngFor="let column of displayedColumns"
+      *ngFor="let column of displayedColumns()"
       [matColumnDef]="column">
       <th *matHeaderCellDef mat-header-cell>
         {{ column | snakeCaseToString }}
@@ -20,8 +20,8 @@
       <td *matCellDef="let element" mat-cell>{{ element[column] }}</td>
     </ng-container>
 
-    <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
-    <tr *matRowDef="let row; columns: columnsToDisplay" mat-row></tr>
+    <tr *matHeaderRowDef="columnsToDisplay()" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: columnsToDisplay()" mat-row></tr>
   </table>
   <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"

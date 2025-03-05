@@ -1,9 +1,11 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   effect,
   HostBinding,
   inject,
+  signal,
 } from '@angular/core';
 import { ProductionTablesStore } from './production-tables.store';
 import {
@@ -20,11 +22,17 @@ import {
 } from '@angular/material/table';
 import { NgForOf } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ProductionTableData } from './shared/types';
+import { ProductionTable, ProductionTableData } from './shared/types';
 import { SnakeCaseToStringPipe } from '../shared/pipes/snake-case-to-string.pipe';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDivider } from '@angular/material/divider';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+function propsToSet(tableDetails: ProductionTable, keys: Set<string>) {
+  tableDetails.data.forEach(table =>
+    Object.keys(table).forEach(key => keys.add(key))
+  );
+}
 
 @Component({
   selector: 'app-production-tables',
@@ -46,13 +54,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   ],
   templateUrl: './production-tables.component.html',
   styleUrl: './production-tables.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductionTablesComponent {
   @HostBinding('class') className = 'h-full';
-  tableName = '';
-  protected displayedColumns: string[] = [];
-  protected columnsToDisplay: string[] = [];
-  protected data: ProductionTableData[] = [];
+  tableName = signal('');
+  protected displayedColumns = signal<string[]>([]);
+  protected columnsToDisplay = signal<string[]>([]);
+  protected data = signal<ProductionTableData[]>([]);
   readonly #productionTablesStore = inject(ProductionTablesStore);
   readonly #route = inject(ActivatedRoute);
   readonly #destroyRef = inject(DestroyRef);
@@ -69,13 +78,11 @@ export class ProductionTablesComponent {
             return;
           }
           const keys = new Set<string>();
-          tableDetails.data.forEach(table =>
-            Object.keys(table).forEach(key => keys.add(key))
-          );
-          this.displayedColumns = Array.from(keys);
-          this.columnsToDisplay = Array.from(keys);
-          this.tableName = `${tableDetails.name} Production Table`;
-          this.data = tableDetails.data;
+          propsToSet(tableDetails, keys);
+          this.displayedColumns.set(Array.from(keys));
+          this.columnsToDisplay.set(Array.from(keys));
+          this.tableName.set(`${tableDetails.name} Production Table`);
+          this.data.set(tableDetails.data);
         });
     });
   }
