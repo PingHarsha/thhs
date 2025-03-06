@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
@@ -31,6 +32,8 @@ import { MatDivider } from '@angular/material/divider';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { propsToSet } from './shared/utils';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
+import { DynamicDetailsComponent } from './dynamic-details/dynamic-details.component';
+import { provideDateFnsAdapter } from '@angular/material-date-fns-adapter';
 
 @Component({
   selector: 'app-production-tables',
@@ -51,12 +54,14 @@ import { MatSort, MatSortHeader } from '@angular/material/sort';
     MatDivider,
     MatSort,
     MatSortHeader,
+    DynamicDetailsComponent,
   ],
   templateUrl: './production-tables.component.html',
   styleUrl: './production-tables.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideDateFnsAdapter()],
 })
-export class ProductionTablesComponent {
+export class ProductionTablesComponent implements AfterViewInit {
   @HostBinding('class') className = 'h-full';
   tableName = signal('');
   dataSource: MatTableDataSource<ProductionTableData>;
@@ -66,6 +71,8 @@ export class ProductionTablesComponent {
   protected columnsToDisplay = signal<string[]>([]);
   protected data = signal<ProductionTableData[]>([]);
   readonly #productionTablesStore = inject(ProductionTablesStore);
+  protected readonly dynamicDetails =
+    this.#productionTablesStore.getDynamicDetails();
   readonly #route = inject(ActivatedRoute);
   readonly #destroyRef = inject(DestroyRef);
 
@@ -84,7 +91,7 @@ export class ProductionTablesComponent {
   }
 
   showDetails(data: ProductionTableData) {
-    console.log(data);
+    this.#productionTablesStore.updateDynamicDetails(data);
   }
 
   protected applyFilter(event: Event) {

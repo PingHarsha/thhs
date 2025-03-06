@@ -1,6 +1,7 @@
 import {
   patchState,
   signalStore,
+  withHooks,
   withMethods,
   withProps,
   withState,
@@ -11,14 +12,16 @@ import { tapResponse } from '@ngrx/operators';
 import { inject } from '@angular/core';
 import { ProductionTablesService } from './api/production-tables.service';
 import { AppStore } from '../app.store';
-import { ProductionTable } from './shared/types';
+import { ProductionTable, ProductionTableData } from './shared/types';
 
 interface ProductionTablesStore {
   data: ProductionTable[];
+  _dynamicDetails: ProductionTableData | null;
 }
 
 const initialState: ProductionTablesStore = {
   data: [],
+  _dynamicDetails: null,
 };
 
 export const ProductionTablesStore = signalStore(
@@ -53,5 +56,16 @@ export const ProductionTablesStore = signalStore(
         })
       )
     ),
+    updateDynamicDetails(details: ProductionTableData) {
+      patchState(store, { _dynamicDetails: details });
+    },
+    getDynamicDetails() {
+      return store._dynamicDetails;
+    }
+  })),
+  withHooks(store => ({
+    onDestroy() {
+      patchState(store, { _dynamicDetails: null });
+    },
   }))
 );

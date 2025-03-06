@@ -3,7 +3,7 @@ import { ProductionTable } from '../shared/types';
 export function getProductionTables(): ProductionTable[] {
   return [
     {
-      name: 'DATA_AAH-AUTH_AGENT_HOLD',
+      name: 'AAH-AUTH_AGENT_HOLD',
       id: 1,
       data: [
         {
@@ -60,7 +60,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CAP-CAP_THRESHOLD',
+      name: 'CAP-CAP_THRESHOLD',
       id: 2,
       data: [
         {
@@ -122,7 +122,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CF1-BILLING CODE',
+      name: 'CF1-BILLING CODE',
       id: 3,
       data: [
         {
@@ -176,7 +176,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CFB- BILLING COMBINATION',
+      name: 'CFB- BILLING COMBINATION',
       id: 4,
       data: [
         {
@@ -242,7 +242,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CFI-ITEM CODE',
+      name: 'CFI-ITEM CODE',
       id: 5,
       data: [
         {
@@ -290,7 +290,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CFM- ELIGIBILITY COMBINATION',
+      name: 'CFM- ELIGIBILITY COMBINATION',
       id: 6,
       data: [
         {
@@ -332,7 +332,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CFP-PROCEDURE CODE',
+      name: 'CFP-PROCEDURE CODE',
       id: 7,
       data: [
         {
@@ -384,7 +384,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CFR-PROCEDURE CODE RATE',
+      name: 'CFR-PROCEDURE CODE RATE',
       id: 8,
       data: [
         {
@@ -432,7 +432,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CLC-LVL OF SRVC GRP CROSS REF',
+      name: 'CLC-LVL OF SRVC GRP CROSS REF',
       id: 9,
       data: [
         {
@@ -483,7 +483,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CLS - LEVEL OF SERVICE',
+      name: 'CLS - LEVEL OF SERVICE',
       id: 10,
       data: [
         {
@@ -531,7 +531,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CMD - MODIFIER',
+      name: 'CMD - MODIFIER',
       id: 11,
       data: [
         {
@@ -579,7 +579,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CMR - MODIFIER CROSS REFERENCE',
+      name: 'CMR - MODIFIER CROSS REFERENCE',
       id: 12,
       data: [
         {
@@ -639,7 +639,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CNB-BILL CODE CROSSWALK',
+      name: 'CNB-BILL CODE CROSSWALK',
       id: 13,
       data: [
         {
@@ -704,7 +704,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CNP - NATIONAL PROCEDURE CODES',
+      name: 'CNP - NATIONAL PROCEDURE CODES',
       id: 14,
       data: [
         {
@@ -740,7 +740,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CNS - CMS NATIONAL CODES',
+      name: 'CNS - CMS NATIONAL CODES',
       id: 15,
       data: [
         {
@@ -774,7 +774,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_COV - COVERAGE CODE',
+      name: 'COV - COVERAGE CODE',
       id: 16,
       data: [
         {
@@ -810,7 +810,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CPQ - PROCEDURE CODE QUALIFIER',
+      name: 'CPQ - PROCEDURE CODE QUALIFIER',
       id: 17,
       data: [
         {
@@ -844,7 +844,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CPS - PLACE OF SERVICE',
+      name: 'CPS - PLACE OF SERVICE',
       id: 18,
       data: [
         {
@@ -878,7 +878,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CPT - CLIENT PROGRAM TYPE',
+      name: 'CPT - CLIENT PROGRAM TYPE',
       id: 19,
       data: [
         {
@@ -914,7 +914,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CRC- REVENUE CODES',
+      name: 'CRC- REVENUE CODES',
       id: 20,
       data: [
         {
@@ -948,7 +948,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CSG - SERVICE GROUP',
+      name: 'CSG - SERVICE GROUP',
       id: 21,
       data: [
         {
@@ -986,7 +986,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CSI - SERVICE CODE ITEM REC',
+      name: 'CSI - SERVICE CODE ITEM REC',
       id: 22,
       data: [
         {
@@ -1020,7 +1020,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CSP - SERVICE CODE PROCEDURE',
+      name: 'CSP - SERVICE CODE PROCEDURE',
       id: 23,
       data: [
         {
@@ -1054,7 +1054,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CSR - SERVICE CODE',
+      name: 'CSR - SERVICE CODE',
       id: 24,
       data: [
         {
@@ -1092,7 +1092,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_CSS - SERVICE GRP SERVICE CD',
+      name: 'CSS - SERVICE GRP SERVICE CD',
       id: 25,
       data: [
         {
@@ -1146,7 +1146,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_DA2 - SERVICE AUTH EDITS',
+      name: 'DA2 - SERVICE AUTH EDITS',
       id: 26,
       data: [
         {
@@ -1222,7 +1222,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_DA3 - NE SERV EDITS',
+      name: 'DA3 - NE SERV EDITS',
       id: 27,
       data: [
         {
@@ -1266,7 +1266,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_DAD - REFERENCE CODES',
+      name: 'DAD - REFERENCE CODES',
       id: 28,
       data: [
         {
@@ -1310,7 +1310,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_DCE - TMHP DUPLICATE CLAIM EDIT',
+      name: 'DCE - TMHP DUPLICATE CLAIM EDIT',
       id: 29,
       data: [
         {
@@ -1346,7 +1346,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_DIA - DIAGNOSIS',
+      name: 'DIA - DIAGNOSIS',
       id: 30,
       data: [
         {
@@ -1392,7 +1392,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_ECC - ELIGIBILITY CATEGORY',
+      name: 'ECC - ELIGIBILITY CATEGORY',
       id: 31,
       data: [
         {
@@ -1426,7 +1426,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_FCD - FUND CODE',
+      name: 'FCD - FUND CODE',
       id: 32,
       data: [
         {
@@ -1464,7 +1464,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_FSR - FISCAL ACCOUNT CODE',
+      name: 'FSR - FISCAL ACCOUNT CODE',
       id: 33,
       data: [
         {
@@ -1526,7 +1526,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_LBR - SERVICE_RESI_LOCATION',
+      name: 'LBR - SERVICE_RESI_LOCATION',
       id: 34,
       data: [
         {
@@ -1558,7 +1558,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_LST - LEVEL OF SERVICE TYPE',
+      name: 'LST - LEVEL OF SERVICE TYPE',
       id: 35,
       data: [
         {
@@ -1592,7 +1592,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_MSQ - MOVEMENT_SEQUENCES',
+      name: 'MSQ - MOVEMENT_SEQUENCES',
       id: 36,
       data: [
         {
@@ -1628,7 +1628,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_PME - TMHP MUTEX',
+      name: 'PME - TMHP MUTEX',
       id: 37,
       data: [
         {
@@ -1666,7 +1666,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_REF - REFERENCE_TABLE',
+      name: 'REF - REFERENCE_TABLE',
       id: 38,
       data: [
         {
@@ -1698,7 +1698,7 @@ export function getProductionTables(): ProductionTable[] {
       ],
     },
     {
-      name: 'DATA_SGO - SRVC GRP SRVC OVERLAP',
+      name: 'SGO - SRVC GRP SRVC OVERLAP',
       id: 39,
       data: [
         {
